@@ -3,6 +3,7 @@ package com.example.mysnitch;
 import java.util.ArrayList;
 
 public class User {
+    private static ArrayList<User> users;
 
     private String username;
     private String password;
