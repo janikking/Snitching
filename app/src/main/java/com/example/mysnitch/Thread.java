@@ -1,5 +1,7 @@
 package com.example.mysnitch;
 
+import com.example.mysnitch.ui.Comment;
+
 import java.util.ArrayList;
 
 public class Thread {
@@ -11,7 +13,7 @@ public class Thread {
     private Media media;
 
     private int likes;
-    private ArrayList<String> reactions;
+    private ArrayList<Comment> comments;
 
     public Thread(User user, String title, String content, Media media){
         this.setUser(user);
@@ -60,11 +62,11 @@ public class Thread {
         this.likes = likes;
     }
 
-    public ArrayList<String> getReactions() {
-        return reactions;
+    public ArrayList<Comment> getComments() {
+        return comments;
     }
 
-    public void setReactions(ArrayList<String> reactions) {
-        this.reactions = reactions;
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
     }
 }
