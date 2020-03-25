@@ -1,4 +1,4 @@
-package com.example.mysnitch.ui;
+package com.example.mysnitch;
 
 import com.example.mysnitch.User;
 

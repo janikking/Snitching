@@ -1,7 +1,5 @@
 package com.example.mysnitch;
 
-import com.example.mysnitch.ui.Comment;
-
 import java.util.ArrayList;
 
 public class Thread {
