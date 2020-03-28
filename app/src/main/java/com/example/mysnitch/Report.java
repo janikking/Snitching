@@ -2,20 +2,46 @@ package com.example.mysnitch;
 
 import android.location.Location;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Report {
 
-    private User user;
-    private Media media;
-    private Vehicle vehicle;
+@Entity
+public class Report implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    @ColumnInfo(name = "title")
     private String title;
+    @ColumnInfo(name = "description")
     private String description;
+
+    @Ignore
+    private User user;
+    @Ignore
+    private Media media;
+    @Ignore
+    private Vehicle vehicle;
+    @Ignore
     private Date date;
+    @Ignore
     private Location location;
 
-    public Report(User user, Media media, Vehicle vehicle, String title, String description, Date date, Location location){
+
+    public Report(String title, String description){
+        this.setId(id);
+        this.setTitle(title);
+        this.setDescription(description);
+    }
+
+
+    public Report(int id, String title, String description, User user, Media media, Vehicle vehicle, Date date, Location location){
         this.setUser(user);
         this.setMedia(media);
         this.setVehicle(vehicle);
@@ -80,5 +106,13 @@ public class Report {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
