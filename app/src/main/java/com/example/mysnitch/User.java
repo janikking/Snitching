@@ -3,7 +3,9 @@ package com.example.mysnitch;
 import java.util.ArrayList;
 
 public class User {
-    private static ArrayList<User> users;
+    private static ArrayList<User> users = new ArrayList<>();
+
+    private static User loggedInUser;
 
     private String username;
     private String password;
@@ -14,10 +16,24 @@ public class User {
     private ArrayList<Report> madeReports;
     private ArrayList<Thread> madeThreads;
 
-    public User(String username, String password, String mailAddress){
+    public User(String username, String password, String mailAddress)
+    {
         this.setUsername(username);
         this.setPassword(password);
+
+        if( mailAddress == null )
+            mailAddress = "";
         this.setMailAddress(mailAddress);
+    }
+
+    public static boolean userExists( String username )
+    {
+        for( User user : users )
+        {
+            if( user.getUsername().equals( username ) )
+                return true;
+        }
+        return false;
     }
 
     public String getUsername() {
@@ -74,5 +90,14 @@ public class User {
 
     public void setMadeThreads(ArrayList<Thread> madeThreads) {
         this.madeThreads = madeThreads;
+    }
+
+    public static ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public static void addUser( User user )
+    {
+        users.add(user);
     }
 }
