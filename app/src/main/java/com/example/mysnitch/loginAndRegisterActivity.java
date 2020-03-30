@@ -45,7 +45,7 @@ public class loginAndRegisterActivity extends AppCompatActivity
                     if( User.getUser(usernameInput).getPassword().equals(passwordInput) )
                     {
                         User.setLoggedInUser(User.getUser(usernameInput));
-                        startActivity(new Intent(loginAndRegisterActivity.this, MainActivity.class));
+                        startActivity(new Intent(loginAndRegisterActivity.this, MenuActivity.class));
                     }
                     else
                     {
