@@ -36,10 +36,16 @@ public class Report implements Serializable {
     private Location location;
 
 
-    public Report(String title, String description){
+    public Report(String title, String description, String licensePlate )
+    {
         this.setId(id);
         this.setTitle(title);
         this.setDescription(description);
+
+        if( !Vehicle.licensePlateExists( licensePlate ) )
+            Vehicle.addVehicle( licensePlate );
+
+        this.vehicle = Vehicle.getVehicleByLicensePlate( licensePlate );
 
         user = User.getLoggedInUser();
         date = new Date();
@@ -47,7 +53,6 @@ public class Report implements Serializable {
         // TODO get the current location and put it in location
     }
 
-    @Ignore
     public Report(int id, String title, String description, User user, Media media, Vehicle vehicle, Date date, Location location){
         this.setId(id);
         this.setUser(user);

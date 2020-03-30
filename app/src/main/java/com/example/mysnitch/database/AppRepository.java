@@ -20,8 +20,8 @@ public class AppRepository {
 
 
     // Creates new report to be sent to insertReport which stores it in database
-    public void insertReport(String title, String description){
-        Report report = new Report(title, description);
+    public void insertReport(String title, String description, String licensePlate){
+        Report report = new Report(title, description, licensePlate);
         insertReport(report);
     }
 

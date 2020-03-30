@@ -1,6 +1,10 @@
 package com.example.mysnitch;
 
+import java.util.ArrayList;
+
 public class Vehicle {
+    private static ArrayList<Vehicle> vehicles = new ArrayList<>();
+
     private String licensePlate;
     private int timesReported;
     private String vehicleDescription;
@@ -9,6 +13,31 @@ public class Vehicle {
     {
         this.setLicensePlate(licensePlate);
         timesReported = 1;
+    }
+
+    public static boolean licensePlateExists( String licensePlate )
+    {
+        for( Vehicle vehicle : vehicles )
+        {
+            if( vehicle.getLicensePlate().equals( licensePlate ) )
+                return true;
+        }
+        return false;
+    }
+
+    public static Vehicle getVehicleByLicensePlate( String licensePlate )
+    {
+        for( Vehicle vehicle : vehicles )
+        {
+            if( vehicle.getLicensePlate().equals( licensePlate ) )
+                return vehicle;
+        }
+        return null;
+    }
+
+    public static void addVehicle( String licensePlate )
+    {
+        vehicles.add( new Vehicle( licensePlate ) );
     }
 
     public String getLicensePlate() {
