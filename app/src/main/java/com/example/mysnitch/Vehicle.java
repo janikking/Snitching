@@ -5,8 +5,10 @@ public class Vehicle {
     private int timesReported;
     private String vehicleDescription;
 
-    public Vehicle(String licensePlate){
+    public Vehicle(String licensePlate)
+    {
         this.setLicensePlate(licensePlate);
+        timesReported = 1;
     }
 
     public String getLicensePlate() {

@@ -12,12 +12,15 @@ import androidx.room.TypeConverters;
 import com.example.mysnitch.database.Converters;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 
 @Entity
 @TypeConverters(Converters.class)
 public class Report implements Serializable {
+
+    private static ArrayList<Report> reports = new ArrayList<>();
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -37,6 +40,11 @@ public class Report implements Serializable {
         this.setId(id);
         this.setTitle(title);
         this.setDescription(description);
+
+        user = User.getLoggedInUser();
+        date = new Date();
+
+        // TODO get the current location and put it in location
     }
 
     @Ignore
@@ -114,5 +122,10 @@ public class Report implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public static void addReport( Report report )
+    {
+        reports.add( report );
     }
 }
