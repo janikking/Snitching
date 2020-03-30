@@ -13,6 +13,7 @@ public class User {
     private int snitchScore;
     private int leaderboardPosition;
 
+
     private ArrayList<Report> madeReports;
     private ArrayList<Thread> madeThreads;
 
