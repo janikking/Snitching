@@ -1,34 +1,40 @@
 package com.example.mysnitch;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
+public class User {
+    private static ArrayList<User> users = new ArrayList<>();
 
-
-public class User implements Serializable {
+    private static User loggedInUser;
 
     private String username;
-
     private String password;
-
     private String mailAddress;
-
     private int snitchScore;
-
     private int leaderboardPosition;
 
 
     private ArrayList<Report> madeReports;
     private ArrayList<Thread> madeThreads;
 
-    public User(String username, String password, String mailAddress){
+    public User(String username, String password, String mailAddress)
+    {
         this.setUsername(username);
         this.setPassword(password);
+
+        if( mailAddress == null )
+            mailAddress = "";
         this.setMailAddress(mailAddress);
+    }
+
+    public static boolean userExists( String username )
+    {
+        for( User user : users )
+        {
+            if( user.getUsername().equals( username ) )
+                return true;
+        }
+        return false;
     }
 
     public String getUsername() {
@@ -85,5 +91,30 @@ public class User implements Serializable {
 
     public void setMadeThreads(ArrayList<Thread> madeThreads) {
         this.madeThreads = madeThreads;
+    }
+
+    public static User getUser( String username )
+    {
+        for( User user : users )
+        {
+            if( user.getUsername().equals(username) )
+            {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public static void addUser( User user )
+    {
+        users.add(user);
+    }
+
+    public static User getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public static void setLoggedInUser(User loggedInUser) {
+        User.loggedInUser = loggedInUser;
     }
 }
