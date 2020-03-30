@@ -48,13 +48,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-
+        /*
         // Test om te kijken of hij errors geeft, als het goed is wordt dit opgeslagen in de database
         // Ik heb nog niet gecheckt of het echt werkt aangezien ik geen view heb waar alle reports in staan
         AppRepository appRepository = new AppRepository(getApplicationContext());
         String title = "Test report";
         String description = "Dit is een description van een report";
         appRepository.insertReport(title, description);
+
+         */
     }
 
     @Override

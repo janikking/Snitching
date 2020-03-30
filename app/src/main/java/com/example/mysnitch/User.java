@@ -21,6 +21,7 @@ public class User implements Serializable {
 
     private int leaderboardPosition;
 
+
     private ArrayList<Report> madeReports;
     private ArrayList<Thread> madeThreads;
 

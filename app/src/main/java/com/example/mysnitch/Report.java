@@ -7,30 +7,29 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
+
+import com.example.mysnitch.database.Converters;
 
 import java.io.Serializable;
 import java.util.Date;
 
 
 @Entity
+@TypeConverters(Converters.class)
 public class Report implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    @ColumnInfo(name = "title")
     private String title;
-    @ColumnInfo(name = "description")
     private String description;
-
-    @Ignore
     private User user;
-    @Ignore
+
     private Media media;
-    @Ignore
+
     private Vehicle vehicle;
-    @Ignore
+
     private Date date;
-    @Ignore
     private Location location;
 
 
@@ -40,8 +39,9 @@ public class Report implements Serializable {
         this.setDescription(description);
     }
 
-
+    @Ignore
     public Report(int id, String title, String description, User user, Media media, Vehicle vehicle, Date date, Location location){
+        this.setId(id);
         this.setUser(user);
         this.setMedia(media);
         this.setVehicle(vehicle);
