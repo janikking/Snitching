@@ -2,6 +2,7 @@ package com.example.mysnitch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +14,6 @@ public class loginAndRegisterActivity extends AppCompatActivity
 
     EditText username;
     EditText password;
-    EditText email;
 
     Button login;
     Button register;
@@ -28,7 +28,6 @@ public class loginAndRegisterActivity extends AppCompatActivity
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        email = findViewById(R.id.email);
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
         errorMessage = findViewById(R.id.errorMessage);
@@ -40,7 +39,23 @@ public class loginAndRegisterActivity extends AppCompatActivity
             {
                 String usernameInput = username.getText().toString();
                 String passwordInput = password.getText().toString();
-                String emailInput = email.getText().toString();
+
+                if( User.userExists(usernameInput) )
+                {
+                    if( User.getUser(usernameInput).getPassword().equals(passwordInput) )
+                    {
+                        User.setLoggedInUser(User.getUser(usernameInput));
+                        startActivity(new Intent(loginAndRegisterActivity.this, MainActivity.class));
+                    }
+                    else
+                    {
+                        errorMessage.setText("password incorrect");
+                    }
+                }
+                else
+                {
+                    errorMessage.setText("username does not exist");
+                }
             }
         });
 
@@ -51,22 +66,22 @@ public class loginAndRegisterActivity extends AppCompatActivity
             {
                 String usernameInput = username.getText().toString();
                 String passwordInput = password.getText().toString();
-                String emailInput = email.getText().toString();
 
                 if( !User.userExists( usernameInput ) )
                 {
                     if( passwordInput.length() >= 6 )
                     {
-                        User.addUser( new User( usernameInput, passwordInput, emailInput ) );
+                        User.addUser( new User( usernameInput, passwordInput, "" ) );
+                        errorMessage.setText( "successfully registered. You can now login" );
                     }
                     else
                     {
-                        errorMessage.setText( "password must be 6 characters at least! " );
+                        errorMessage.setText( "password must be at least 6 characters" );
                     }
                 }
                 else
                 {
-                    errorMessage.setText( "username already exists! " );
+                    errorMessage.setText( "username already exists" );
                 }
             }
         });

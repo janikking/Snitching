@@ -92,12 +92,28 @@ public class User {
         this.madeThreads = madeThreads;
     }
 
-    public static ArrayList<User> getUsers() {
-        return users;
+    public static User getUser( String username )
+    {
+        for( User user : users )
+        {
+            if( user.getUsername().equals(username) )
+            {
+                return user;
+            }
+        }
+        return null;
     }
 
     public static void addUser( User user )
     {
         users.add(user);
+    }
+
+    public static User getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public static void setLoggedInUser(User loggedInUser) {
+        User.loggedInUser = loggedInUser;
     }
 }
