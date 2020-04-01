@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class loginAndRegisterActivity extends AppCompatActivity
+public class LoginAndRegisterActivity extends AppCompatActivity
 {
 
     EditText username;
@@ -64,7 +64,7 @@ public class loginAndRegisterActivity extends AppCompatActivity
                         if(appRepository.getUserByName(usernameInput).getPassword().equals(passwordInput))
                         {
                             User.setLoggedInUser(appRepository.getUserByName(usernameInput));
-                            startActivity(new Intent(loginAndRegisterActivity.this, MenuActivity.class));
+                            startActivity(new Intent(LoginAndRegisterActivity.this, MenuActivity.class));
                         }
                         else
                         {

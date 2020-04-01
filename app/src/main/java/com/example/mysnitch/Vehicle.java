@@ -74,6 +74,10 @@ public class Vehicle {
         this.vehicleDescription = vehicleDescription;
     }
 
+    public static ArrayList<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
     public void isReported(){
         this.timesReported++;
     }

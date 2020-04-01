@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateReportActivity"></activity>
+        <activity android:name=".SchandpaalActivity"></activity>
+        <activity android:name=".ViewReportsActivity" />
+        <activity android:name=".CreateReportActivity" />
         <activity android:name=".MenuActivity" />
-        <activity android:name=".loginAndRegisterActivity">
+        <activity android:name=".LoginAndRegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,6 +1,7 @@
 package com.example.mysnitch;
 
 import android.location.Location;
+import android.location.LocationProvider;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -35,24 +36,9 @@ public class Report implements Serializable {
     private Date date;
     @Ignore
     private Location location;
+    @Ignore
     private String licensePlate;
 
-    /*
-    public Report(String title, String description, String licensePlate )
-    {
-        this.setId(id);
-        this.setLicensePlate(licensePlate);
-        this.setTitle(title);
-        this.setDescription(description);
-        this.setVehicle(new Vehicle(licensePlate));
-
-
-        user = User.getLoggedInUser();
-        date = new Date();
-
-        // TODO get the current location and put it in location
-    }
-     */
 
     public Report(String title, String description, Vehicle vehicle )
     {
@@ -61,7 +47,6 @@ public class Report implements Serializable {
         this.setTitle(title);
         this.setDescription(description);
         this.setVehicle(vehicle);
-        vehicle.isReported();
         user = User.getLoggedInUser();
         date = new Date();
 
@@ -150,6 +135,10 @@ public class Report implements Serializable {
         reports.add( report );
     }
 
+    public static ArrayList<Report> getReports() {
+        return reports;
+    }
+
     public String getLicensePlate() {
         return licensePlate;
     }
@@ -157,4 +146,5 @@ public class Report implements Serializable {
     public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
+
 }

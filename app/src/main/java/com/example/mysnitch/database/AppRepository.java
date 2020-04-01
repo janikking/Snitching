@@ -10,6 +10,8 @@ import com.example.mysnitch.Report;
 import com.example.mysnitch.User;
 import com.example.mysnitch.Vehicle;
 import com.example.mysnitch.DiscussionThread;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -39,11 +41,18 @@ public class AppRepository {
     // Creates new report to be sent to insertReport which stores it in database
     public void insertReport(String title, String description, String licensePlate) throws ExecutionException, InterruptedException {
         Report report;
+        Vehicle vehicle;
+        // Checks if Vehicle with this license plate is saved in db. If so, gets that one. If not,
+        // creates a new Vehicle with that licenseplate
         if(doesVehicleExist(licensePlate)){
-            report = new Report(title, description, getVehicleByLp(licensePlate));
+            vehicle = getVehicleByLp(licensePlate);
+            report = new Report(title, description, vehicle);
+            vehicle.isReported();
+            updateVehicle(vehicle);
         }
         else{
-            Vehicle vehicle = new Vehicle(licensePlate);
+            insertVehicle(licensePlate);
+            vehicle = getVehicleByLp(licensePlate);
             report = new Report(title, description, vehicle);
         }
         insertReport(report);

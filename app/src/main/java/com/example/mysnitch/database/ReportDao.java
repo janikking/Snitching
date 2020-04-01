@@ -8,6 +8,7 @@ import androidx.room.Update;
 
 import com.example.mysnitch.Report;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
