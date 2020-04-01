@@ -50,6 +50,7 @@ public class SchandpaalActivity extends AppCompatActivity
             reportTitle.setLayoutParams(layoutParams);
             reportTitle.setText(i + ": " + orderedVehicles.get(i).getLicensePlate() + ", " + orderedVehicles.get(i).getTimesReported() + " times");
             reportTitle.setBackgroundColor(0xff_ebebeb);
+            reportTitle.setWidth(reportTitle.getMaxWidth());
             schandpaalLayout.addView(reportTitle);
         }
     }

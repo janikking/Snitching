@@ -48,16 +48,22 @@ public class ViewReportsActivity extends AppCompatActivity
         reportTitle.setLayoutParams( layoutParams );
         reportTitle.setText( report.getTitle() );
         reportTitle.setBackgroundColor( 0xffc9c9c9 );
+        reportTitle.setWidth(reportTitle.getMaxWidth());
 
         TextView reportLicensePlate = new TextView(this );
         reportLicensePlate.setLayoutParams( layoutParams );
         reportLicensePlate.setText( report.getVehicle().getLicensePlate() );
         reportLicensePlate.setBackgroundColor( 0xff_a8a8a8 );
+        reportLicensePlate.setWidth(reportTitle.getMaxWidth());
+
+        LinearLayout.LayoutParams layoutParamsForDescription = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
+        layoutParamsForDescription.setMargins( 0, 0, 0, 50);
 
         TextView reportDescription = new TextView(this );
-        reportDescription.setLayoutParams( layoutParams );
+        reportDescription.setLayoutParams( layoutParamsForDescription );
         reportDescription.setText( report.getDescription() );
         reportDescription.setBackgroundColor( 0xff_888888 );
+        reportDescription.setWidth(reportDescription.getMaxWidth());
 
         linearLayout.addView( reportTitle );
         linearLayout.addView( reportLicensePlate );
