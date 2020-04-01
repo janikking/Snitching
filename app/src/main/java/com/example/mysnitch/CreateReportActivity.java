@@ -16,6 +16,7 @@ public class CreateReportActivity extends AppCompatActivity {
     EditText licensePlate;
 
     Button createReport;
+    Button backToMenu;
 
     TextView statusMessage;
 
@@ -28,6 +29,7 @@ public class CreateReportActivity extends AppCompatActivity {
         reportDiscription = findViewById(R.id.reportDiscription);
         licensePlate = findViewById(R.id.reportLicensePlate);
         createReport = findViewById(R.id.createReportButton);
+        backToMenu = findViewById(R.id.backToMenu);
         statusMessage = findViewById(R.id.statusMessage);
 
         createReport.setOnClickListener(new View.OnClickListener()
@@ -44,6 +46,15 @@ public class CreateReportActivity extends AppCompatActivity {
                     statusMessage.setText("Succesfuly created report!");
                 }
 
+            }
+        });
+
+        backToMenu.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(CreateReportActivity.this, MenuActivity.class));
             }
         });
     }
