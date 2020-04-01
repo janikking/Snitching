@@ -39,7 +39,8 @@ public class Report implements Serializable {
     @Ignore
     private String licensePlate;
 
-
+    // Licensplate constructor weggehaald, zorgde voor confusion in Android Room
+    // In AppRepository wordt nu een Vehicle gemaakt van de licenseplate als die nog niet bestond
     public Report(String title, String description, Vehicle vehicle )
     {
         this.setId(id);
