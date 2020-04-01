@@ -33,14 +33,9 @@ public class Report implements Serializable {
     private Location location;
 
 
-    public Report(String title, String description){
-        this.setId(id);
-        this.setTitle(title);
-        this.setDescription(description);
-    }
 
-    @Ignore
-    public Report(int id, String title, String description, User user, Media media, Vehicle vehicle, Date date, Location location){
+
+    public Report(String title, String description, User user, Media media, Vehicle vehicle, Date date, Location location){
         this.setId(id);
         this.setUser(user);
         this.setMedia(media);

@@ -1,12 +1,15 @@
 package com.example.mysnitch;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 
+@Entity
 public class User {
-    private static ArrayList<User> users = new ArrayList<>();
-
-    private static User loggedInUser;
-
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String username;
     private String password;
     private String mailAddress;
@@ -14,8 +17,16 @@ public class User {
     private int leaderboardPosition;
 
 
+
+
+    @Ignore
+    private static ArrayList<User> users = new ArrayList<>();
+    @Ignore
+    private static User loggedInUser;
+    @Ignore
     private ArrayList<Report> madeReports;
-    private ArrayList<Thread> madeThreads;
+    @Ignore
+    private ArrayList<DiscussionThread> madeDiscussionThreads;
 
     public User(String username, String password, String mailAddress)
     {
@@ -85,12 +96,12 @@ public class User {
         this.madeReports = madeReports;
     }
 
-    public ArrayList<Thread> getMadeThreads() {
-        return madeThreads;
+    public ArrayList<DiscussionThread> getMadeDiscussionThreads() {
+        return madeDiscussionThreads;
     }
 
-    public void setMadeThreads(ArrayList<Thread> madeThreads) {
-        this.madeThreads = madeThreads;
+    public void setMadeDiscussionThreads(ArrayList<DiscussionThread> madeDiscussionThreads) {
+        this.madeDiscussionThreads = madeDiscussionThreads;
     }
 
     public static User getUser( String username )
@@ -116,5 +127,13 @@ public class User {
 
     public static void setLoggedInUser(User loggedInUser) {
         User.loggedInUser = loggedInUser;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

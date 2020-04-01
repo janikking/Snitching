@@ -1,19 +1,27 @@
 package com.example.mysnitch;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Thread {
+@Entity
+public class DiscussionThread implements Serializable {
 
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private User user;
-
     private String title;
     private String content;
     private Media media;
-
     private int likes;
+
+    @Ignore
     private ArrayList<Comment> comments;
 
-    public Thread(User user, String title, String content, Media media){
+    public DiscussionThread(User user, String title, String content, Media media){
         this.setUser(user);
         this.setTitle(title);
         this.setContent(content);
@@ -66,5 +74,13 @@ public class Thread {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

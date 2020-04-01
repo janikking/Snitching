@@ -2,12 +2,22 @@ package com.example.mysnitch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.mysnitch.database.AppRepository;
+import com.example.mysnitch.database.UserDao;
+
+import java.lang.ref.WeakReference;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class loginAndRegisterActivity extends AppCompatActivity
 {
@@ -26,6 +36,8 @@ public class loginAndRegisterActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_and_register);
 
+        // Apprepository manages every function between the app and database
+        final AppRepository appRepository = new AppRepository(getApplicationContext());
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);
@@ -40,21 +52,35 @@ public class loginAndRegisterActivity extends AppCompatActivity
                 String usernameInput = username.getText().toString();
                 String passwordInput = password.getText().toString();
 
-                if( User.userExists(usernameInput) )
-                {
-                    if( User.getUser(usernameInput).getPassword().equals(passwordInput) )
+
+
+                try {
+
+
+                    // Haalt user uit de database met username == usernameinput en checkt
+                    if(appRepository.userExists(usernameInput))
                     {
-                        User.setLoggedInUser(User.getUser(usernameInput));
-                        startActivity(new Intent(loginAndRegisterActivity.this, MainActivity.class));
+                        // Haalt user uit de database met username == usernameinput en checkt wachtwoord
+                        if(appRepository.getUserByName(usernameInput).getPassword().equals(passwordInput))
+                        {
+                            User.setLoggedInUser(appRepository.getUserByName(usernameInput));
+                            startActivity(new Intent(loginAndRegisterActivity.this, MainActivity.class));
+                        }
+                        else
+                        {
+                            errorMessage.setText("password incorrect");
+                        }
                     }
                     else
                     {
-                        errorMessage.setText("password incorrect");
+                        errorMessage.setText("username does not exist");
                     }
-                }
-                else
-                {
-                    errorMessage.setText("username does not exist");
+
+
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -67,11 +93,14 @@ public class loginAndRegisterActivity extends AppCompatActivity
                 String usernameInput = username.getText().toString();
                 String passwordInput = password.getText().toString();
 
-                if( !User.userExists( usernameInput ) )
+                if( true )
                 {
                     if( passwordInput.length() >= 6 )
                     {
-                        User.addUser( new User( usernameInput, passwordInput, "" ) );
+                        // Creates a new user and inserts it into the database
+                        appRepository.insertUser(usernameInput, passwordInput, "");
+
+                        //User.addUser( new User( usernameInput, passwordInput, "" ) );
                         errorMessage.setText( "successfully registered. You can now login" );
                     }
                     else
@@ -86,4 +115,5 @@ public class loginAndRegisterActivity extends AppCompatActivity
             }
         });
     }
+
 }
