@@ -48,7 +48,7 @@ public class SchandpaalActivity extends AppCompatActivity
         {
             TextView reportTitle = new TextView(this);
             reportTitle.setLayoutParams(layoutParams);
-            reportTitle.setText(i + ": " + orderedVehicles.get(i).getLicensePlate() + ", " + orderedVehicles.get(i).getTimesReported() + " times");
+            reportTitle.setText((i + 1) + ": " + orderedVehicles.get(i).getLicensePlate() + ", " + orderedVehicles.get(i).getTimesReported() + " times");
             reportTitle.setBackgroundColor(0xff_ebebeb);
             reportTitle.setWidth(reportTitle.getMaxWidth());
             schandpaalLayout.addView(reportTitle);
