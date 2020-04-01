@@ -1,13 +1,23 @@
 package com.example.mysnitch;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 
+@Entity
 public class Vehicle {
-    private static ArrayList<Vehicle> vehicles = new ArrayList<>();
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     private String licensePlate;
     private int timesReported;
     private String vehicleDescription;
+
+
+    @Ignore
+    private static ArrayList<Vehicle> vehicles = new ArrayList<>();
 
     public Vehicle(String licensePlate)
     {
@@ -62,5 +72,17 @@ public class Vehicle {
 
     public void setVehicleDescription(String vehicleDescription) {
         this.vehicleDescription = vehicleDescription;
+    }
+
+    public void isReported(){
+        this.timesReported++;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

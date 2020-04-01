@@ -28,25 +28,40 @@ public class Report implements Serializable {
     private String description;
     private User user;
 
+    @Ignore
     private Media media;
 
     private Vehicle vehicle;
-
     private Date date;
+    @Ignore
     private Location location;
+    private String licensePlate;
 
-
+    /*
     public Report(String title, String description, String licensePlate )
     {
         this.setId(id);
+        this.setLicensePlate(licensePlate);
         this.setTitle(title);
         this.setDescription(description);
+        this.setVehicle(new Vehicle(licensePlate));
 
-        if( !Vehicle.licensePlateExists( licensePlate ) )
-            Vehicle.addVehicle( licensePlate );
 
-        this.vehicle = Vehicle.getVehicleByLicensePlate( licensePlate );
+        user = User.getLoggedInUser();
+        date = new Date();
 
+        // TODO get the current location and put it in location
+    }
+     */
+
+    public Report(String title, String description, Vehicle vehicle )
+    {
+        this.setId(id);
+        this.setLicensePlate(licensePlate);
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setVehicle(vehicle);
+        vehicle.isReported();
         user = User.getLoggedInUser();
         date = new Date();
 
@@ -133,5 +148,13 @@ public class Report implements Serializable {
     public static void addReport( Report report )
     {
         reports.add( report );
+    }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 }

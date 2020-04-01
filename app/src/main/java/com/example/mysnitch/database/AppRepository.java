@@ -37,8 +37,15 @@ public class AppRepository {
      */
 
     // Creates new report to be sent to insertReport which stores it in database
-    public void insertReport(String title, String description, String licensePlate){
-        Report report = new Report(title, description, licensePlate);
+    public void insertReport(String title, String description, String licensePlate) throws ExecutionException, InterruptedException {
+        Report report;
+        if(doesVehicleExist(licensePlate)){
+            report = new Report(title, description, getVehicleByLp(licensePlate));
+        }
+        else{
+            Vehicle vehicle = new Vehicle(licensePlate);
+            report = new Report(title, description, vehicle);
+        }
         insertReport(report);
     }
 
@@ -227,4 +234,78 @@ public class AppRepository {
         });
         return discussionThread.get();
     }
+
+    /*
+
+        VEHICLE FUNCTIONS
+
+     */
+
+    public void insertVehicle(String licensePlate){
+        Vehicle vehicle = new Vehicle(licensePlate);
+        insertVehicle(vehicle);
+    }
+
+    public void insertVehicle(final Vehicle vehicle){
+        new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... voids)    {
+                appDatabase.vehicleDao().insertVehicle(vehicle);
+                return null;
+            }
+        }.execute();
+    }
+
+    public void updateVehicle(final Vehicle vehicle){
+        new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... voids)    {
+                appDatabase.vehicleDao().updateVehicle(vehicle);
+                return null;
+            }
+        }.execute();
+    }
+
+    public void deleteVehicle(final Vehicle vehicle){
+        new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... voids)    {
+                appDatabase.vehicleDao().deleteVehicle(vehicle);
+                return null;
+            }
+        }.execute();
+    }
+
+    public List<Vehicle> getAllVehicles() throws ExecutionException, InterruptedException{
+        Future<List<Vehicle>> vehicles = myExecutor.submit(new Callable(){
+            public Object call() throws Exception{
+                return appDatabase.vehicleDao().getAllVehicles();
+            }
+        });
+        return vehicles.get();
+    }
+
+    public Vehicle getVehicleByLp(final String lp) throws ExecutionException, InterruptedException{
+        Future<Vehicle> vehicle = myExecutor.submit(new Callable(){
+            public Object call() throws Exception{
+                return appDatabase.vehicleDao().getVehicleByLp(lp);
+            }
+        });
+        return vehicle.get();
+    }
+
+    public Boolean doesVehicleExist(final String lp) throws ExecutionException, InterruptedException {
+        Future<Boolean> exists = myExecutor.submit(new Callable() {
+            public Object call() throws Exception{
+                if(appDatabase.vehicleDao().doesVehicleExist(lp) == 0){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        });
+        return exists.get();
+    }
+
 }
