@@ -12,6 +12,7 @@ public class MenuActivity extends AppCompatActivity {
 
     Button createReport;
     Button viewReports;
+    Button schandpaal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,16 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 startActivity(new Intent(MenuActivity.this, ViewReportsActivity.class));
+            }
+        });
+
+        schandpaal = findViewById(R.id.goToSchandpaal);
+        schandpaal.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(MenuActivity.this, SchandpaalActivity.class));
             }
         });
     }

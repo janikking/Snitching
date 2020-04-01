@@ -12,7 +12,7 @@ public class Vehicle {
     public Vehicle(String licensePlate)
     {
         this.setLicensePlate(licensePlate);
-        timesReported = 1;
+        timesReported = 0;
     }
 
     public static boolean licensePlateExists( String licensePlate )
@@ -62,5 +62,9 @@ public class Vehicle {
 
     public void setVehicleDescription(String vehicleDescription) {
         this.vehicleDescription = vehicleDescription;
+    }
+
+    public static ArrayList<Vehicle> getVehicles() {
+        return vehicles;
     }
 }

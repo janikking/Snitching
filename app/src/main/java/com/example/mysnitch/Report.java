@@ -46,6 +46,7 @@ public class Report implements Serializable {
             Vehicle.addVehicle( licensePlate );
 
         this.vehicle = Vehicle.getVehicleByLicensePlate( licensePlate );
+        vehicle.setTimesReported(vehicle.getTimesReported() + 1);
 
         user = User.getLoggedInUser();
         date = new Date();
