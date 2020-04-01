@@ -1,7 +1,6 @@
 package com.example.mysnitch.database;
 
 import android.content.Context;
-import android.location.Location;
 import android.os.AsyncTask;
 
 import androidx.room.Room;
@@ -38,8 +37,8 @@ public class AppRepository {
      */
 
     // Creates new report to be sent to insertReport which stores it in database
-    public void insertReport(String title, String description, User user, Media media, Vehicle vehicle, Date date, Location location){
-        Report report = new Report(title, description, user, media, vehicle, date, location);
+    public void insertReport(String title, String description, String licensePlate){
+        Report report = new Report(title, description, licensePlate);
         insertReport(report);
     }
 
