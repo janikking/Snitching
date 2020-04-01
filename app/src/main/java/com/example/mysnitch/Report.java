@@ -133,4 +133,8 @@ public class Report implements Serializable {
     {
         reports.add( report );
     }
+
+    public static ArrayList<Report> getReports() {
+        return reports;
+    }
 }

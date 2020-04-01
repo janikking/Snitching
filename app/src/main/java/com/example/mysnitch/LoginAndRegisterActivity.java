@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class loginAndRegisterActivity extends AppCompatActivity
+public class LoginAndRegisterActivity extends AppCompatActivity
 {
 
     EditText username;
@@ -45,7 +45,7 @@ public class loginAndRegisterActivity extends AppCompatActivity
                     if( User.getUser(usernameInput).getPassword().equals(passwordInput) )
                     {
                         User.setLoggedInUser(User.getUser(usernameInput));
-                        startActivity(new Intent(loginAndRegisterActivity.this, MenuActivity.class));
+                        startActivity(new Intent(LoginAndRegisterActivity.this, MenuActivity.class));
                     }
                     else
                     {
