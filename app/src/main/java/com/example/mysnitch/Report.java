@@ -42,10 +42,10 @@ public class Report implements Serializable {
         this.setTitle(title);
         this.setDescription(description);
 
-        if( !Vehicle.licensePlateExists( licensePlate ) )
-            Vehicle.addVehicle( licensePlate );
+        if( !Vehicle.licensePlateExists( licensePlate.toUpperCase() ) )
+            Vehicle.addVehicle( licensePlate.toUpperCase() );
 
-        this.vehicle = Vehicle.getVehicleByLicensePlate( licensePlate );
+        this.vehicle = Vehicle.getVehicleByLicensePlate( licensePlate.toUpperCase() );
         vehicle.setTimesReported(vehicle.getTimesReported() + 1);
 
         user = User.getLoggedInUser();
