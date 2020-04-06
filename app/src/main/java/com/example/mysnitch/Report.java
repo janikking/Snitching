@@ -35,7 +35,6 @@ public class Report implements Serializable {
     private Vehicle vehicle;
     private Date date;
     @Ignore
-    @Ignore
     private Location location;
     @Ignore
     private String licensePlate;
