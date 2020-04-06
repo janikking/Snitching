@@ -9,6 +9,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.mysnitch.database.AppRepository;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 public class ViewReportsActivity extends AppCompatActivity
 {
 
@@ -21,6 +28,17 @@ public class ViewReportsActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_reports);
+        List<Report> allReports = null;
+
+        AppRepository appRepository = new AppRepository(getApplicationContext());
+
+        try {
+            allReports = appRepository.getReports();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         linearLayout = findViewById(R.id.reportsLayout);
 
@@ -34,7 +52,7 @@ public class ViewReportsActivity extends AppCompatActivity
             }
         });
 
-        for( Report report : Report.getReports() )
+        for( Report report : allReports )
         {
             addReportToLayout( report );
         }

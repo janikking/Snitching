@@ -9,7 +9,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.mysnitch.database.AppRepository;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class SchandpaalActivity extends AppCompatActivity
 {
@@ -22,6 +28,17 @@ public class SchandpaalActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schandpaal);
+        AppRepository appRepository = new AppRepository(getApplicationContext());
+        List<Vehicle> vehicles = null;
+
+        // Gets all vehicles from database in a List
+        try {
+            vehicles = appRepository.getAllVehicles();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         schandpaalLayout = findViewById(R.id.schandpaalLayout);
 
@@ -34,15 +51,17 @@ public class SchandpaalActivity extends AppCompatActivity
                 startActivity(new Intent(SchandpaalActivity.this, MenuActivity.class));
             }
         });
-
-        addContent();
+        // addes parameter for regular List to convert to ArrayList
+        addContent(vehicles);
     }
 
-    private void addContent()
+    private void addContent(List<Vehicle> allVehicles)
     {
+        // converts List of vehicles to ArrayList of vehicles
+        ArrayList<Vehicle> unorderedVehicles = new ArrayList<Vehicle>(allVehicles);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams( LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT );
 
-        ArrayList<Vehicle> orderedVehicles = orderVehicles( Vehicle.getVehicles() ); // TODO Vehicle.getVehicles() should be loaded from database
+        ArrayList<Vehicle> orderedVehicles = orderVehicles(unorderedVehicles); // TODO Vehicle.getVehicles() should be loaded from database
 
         for (int i = 0; i < orderedVehicles.size(); i++)
         {

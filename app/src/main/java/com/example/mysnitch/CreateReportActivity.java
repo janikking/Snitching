@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.mysnitch.database.AppRepository;
+
+import java.util.concurrent.ExecutionException;
+
 public class CreateReportActivity extends AppCompatActivity {
 
     EditText reportTitle;
@@ -24,6 +28,7 @@ public class CreateReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_report);
+        final AppRepository appRepository = new AppRepository(getApplicationContext());
 
         reportTitle = findViewById(R.id.reportTitle);
         reportDiscription = findViewById(R.id.reportDiscription);
@@ -42,7 +47,19 @@ public class CreateReportActivity extends AppCompatActivity {
                     licensePlate.getText().toString().length() > 0
                 )
                 {
-                    Report.addReport( new Report( reportTitle.getText().toString(), reportDiscription.getText().toString(), licensePlate.getText().toString() ) );
+
+                    try {
+                        appRepository.insertReport(reportTitle.getText().toString(), reportDiscription.getText().toString(), licensePlate.getText().toString());
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    reportTitle.setText("");
+                    reportDiscription.setText("");
+                    licensePlate.setText("");
+                    //Report.addReport( new Report( reportTitle.getText().toString(), reportDiscription.getText().toString(), licensePlate.getText().toString() ) );
                     statusMessage.setText("Succesfuly created report!");
                 }
 

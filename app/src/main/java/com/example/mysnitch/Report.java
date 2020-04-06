@@ -1,6 +1,7 @@
 package com.example.mysnitch;
 
 import android.location.Location;
+import android.location.LocationProvider;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -19,7 +20,7 @@ import java.util.Date;
 @Entity
 @TypeConverters(Converters.class)
 public class Report implements Serializable {
-
+    @Ignore
     private static ArrayList<Report> reports = new ArrayList<>();
 
     @PrimaryKey(autoGenerate = true)
@@ -28,17 +29,23 @@ public class Report implements Serializable {
     private String description;
     private User user;
 
+    @Ignore
     private Media media;
 
     private Vehicle vehicle;
-
     private Date date;
+    @Ignore
+    @Ignore
     private Location location;
+    @Ignore
+    private String licensePlate;
 
-
-    public Report(String title, String description, String licensePlate )
+    // Licensplate constructor weggehaald, zorgde voor confusion in Android Room
+    // In AppRepository wordt nu een Vehicle gemaakt van de licenseplate als die nog niet bestond
+    public Report(String title, String description, Vehicle vehicle )
     {
         this.setId(id);
+        this.setLicensePlate(licensePlate);
         this.setTitle(title);
         this.setDescription(description);
 
@@ -56,7 +63,8 @@ public class Report implements Serializable {
         // TODO get the current location and put it in location
     }
 
-    public Report(int id, String title, String description, User user, Media media, Vehicle vehicle, Date date, Location location){
+
+    public Report(String title, String description, User user, Media media, Vehicle vehicle, Date date, Location location){
         this.setId(id);
         this.setUser(user);
         this.setMedia(media);
@@ -140,4 +148,13 @@ public class Report implements Serializable {
     public static ArrayList<Report> getReports() {
         return reports;
     }
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
 }
