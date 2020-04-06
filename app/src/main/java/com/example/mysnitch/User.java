@@ -25,6 +25,8 @@ public class User {
         if( mailAddress == null )
             mailAddress = "";
         this.setMailAddress(mailAddress);
+
+        this.snitchScore = 0;
     }
 
     public static boolean userExists( String username )

@@ -51,6 +51,8 @@ public class Report implements Serializable {
         user = User.getLoggedInUser();
         date = new Date();
 
+        User.getLoggedInUser().setSnitchScore( User.getLoggedInUser().getSnitchScore() + 1 );
+
         // TODO get the current location and put it in location
     }
 
