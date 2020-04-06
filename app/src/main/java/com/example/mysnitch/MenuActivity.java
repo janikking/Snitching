@@ -13,6 +13,7 @@ public class MenuActivity extends AppCompatActivity {
     Button createReport;
     Button viewReports;
     Button schandpaal;
+    Button leaderboard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,16 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 startActivity(new Intent(MenuActivity.this, SchandpaalActivity.class));
+            }
+        });
+
+        leaderboard = findViewById(R.id.goToLeaderboardView);
+        leaderboard.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(MenuActivity.this, LeaderboardActivity.class));
             }
         });
     }

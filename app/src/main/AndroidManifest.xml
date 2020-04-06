@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SchandpaalActivity"></activity>
+        <activity android:name=".LeaderboardActivity"></activity>
+        <activity android:name=".SchandpaalActivity" />
         <activity android:name=".ViewReportsActivity" />
         <activity android:name=".CreateReportActivity" />
         <activity android:name=".MenuActivity" />
