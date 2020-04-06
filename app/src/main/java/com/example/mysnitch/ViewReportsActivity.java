@@ -83,8 +83,15 @@ public class ViewReportsActivity extends AppCompatActivity
         reportDescription.setBackgroundColor( 0xff_888888 );
         reportDescription.setWidth(reportDescription.getMaxWidth());
 
+        TextView reportLocation = new TextView(this );
+        reportDescription.setLayoutParams( layoutParamsForDescription );
+        reportDescription.setText( report.getLocation() );
+        reportDescription.setBackgroundColor( 0xff_888888 );
+        reportDescription.setWidth(reportDescription.getMaxWidth());
+
         linearLayout.addView( reportTitle );
         linearLayout.addView( reportLicensePlate );
         linearLayout.addView( reportDescription );
+        linearLayout.addView( reportLocation );
     }
 }

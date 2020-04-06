@@ -27,6 +27,7 @@ public class Report implements Serializable {
     private int id;
     private String title;
     private String description;
+    private  String location;
     private User user;
 
     @Ignore
@@ -34,14 +35,13 @@ public class Report implements Serializable {
 
     private Vehicle vehicle;
     private Date date;
-    @Ignore
-    private Location location;
+
     @Ignore
     private String licensePlate;
 
     // Licensplate constructor weggehaald, zorgde voor confusion in Android Room
     // In AppRepository wordt nu een Vehicle gemaakt van de licenseplate als die nog niet bestond
-    public Report(String title, String description, Vehicle vehicle )
+    public Report(String title, String description, Vehicle vehicle, String longitude, String latitude )
     {
         this.setId(id);
         this.setLicensePlate(licensePlate);
@@ -60,10 +60,11 @@ public class Report implements Serializable {
         User.getLoggedInUser().setSnitchScore( User.getLoggedInUser().getSnitchScore() + 1 );
 
         // TODO get the current location and put it in location
+        location = location + longitude + "" + latitude;
     }
 
 
-    public Report(String title, String description, User user, Media media, Vehicle vehicle, Date date, Location location){
+    public Report(String title, String description, User user, Media media, Vehicle vehicle, Date date, String location){
         this.setId(id);
         this.setUser(user);
         this.setMedia(media);
@@ -123,11 +124,11 @@ public class Report implements Serializable {
         this.date = date;
     }
 
-    public Location getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 

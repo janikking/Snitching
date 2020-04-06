@@ -39,21 +39,21 @@ public class AppRepository {
      */
 
     // Creates new report to be sent to insertReport which stores it in database
-    public void insertReport(String title, String description, String licensePlate) throws ExecutionException, InterruptedException {
+    public void insertReport(String title, String description, String licensePlate, String longitude, String latitude) throws ExecutionException, InterruptedException {
         Report report;
         Vehicle vehicle;
         // Checks if Vehicle with this license plate is saved in db. If so, gets that one. If not,
         // creates a new Vehicle with that licenseplate
         if(doesVehicleExist(licensePlate)){
             vehicle = getVehicleByLp(licensePlate);
-            report = new Report(title, description, vehicle);
+            report = new Report(title, description, vehicle, longitude, latitude);
             vehicle.isReported();
             updateVehicle(vehicle);
         }
         else{
             insertVehicle(licensePlate);
             vehicle = getVehicleByLp(licensePlate);
-            report = new Report(title, description, vehicle);
+            report = new Report(title, description, vehicle, longitude, latitude);
         }
         insertReport(report);
     }
